@@ -14,38 +14,38 @@ export default function Navbar() {
   };
 
   return (
-    <header className="border-b-2 border-ink bg-paper sticky top-0 z-20">
+    <header className="bg-ink text-paper sticky top-0 z-20">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to="/" className="font-display text-2xl font-700 tracking-tight text-ink">
-          Booked<span className="text-brass">.</span>
+        <Link to="/" className="font-display text-2xl font-bold tracking-tight text-paper">
+          Booked<span className="text-accent">.</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <Link to="/?section=store" className="hover:text-brass">Shop</Link>
-          <Link to="/?section=library" className="hover:text-forest">Library</Link>
-          {user && <Link to="/my-activity" className="hover:text-brass">My Activity</Link>}
-          {user?.role === "admin" && <Link to="/admin" className="hover:text-brass">Admin</Link>}
+          <Link to="/?section=store" className="hover:text-accent">Shop</Link>
+          <Link to="/?section=library" className="hover:text-accent">Library</Link>
+          {user && <Link to="/my-activity" className="hover:text-accent">My Activity</Link>}
+          {user?.role === "admin" && <Link to="/admin" className="hover:text-accent">Admin</Link>}
         </nav>
 
         <div className="flex items-center gap-3">
           {user && (
-            <Link to="/cart" className="relative text-sm font-medium hover:text-brass">
+            <Link to="/cart" className="relative text-sm font-medium hover:text-accent">
               Cart
               {cartCount > 0 && (
-                <span className="absolute -top-2 -right-3 bg-burgundy text-paper text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
+                <span className="absolute -top-2 -right-3 bg-accent text-ink text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
             </Link>
           )}
           {user ? (
-            <button onClick={handleLogout} className="text-sm border border-ink px-3 py-1 rounded-sm hover:bg-ink hover:text-paper transition">
+            <button onClick={handleLogout} className="text-sm border border-paper/40 px-3 py-1 rounded-sm hover:bg-paper hover:text-ink transition">
               Log out
             </button>
           ) : (
             <>
-              <Link to="/login" className="text-sm px-3 py-1 hover:text-brass">Log in</Link>
-              <Link to="/register" className="text-sm bg-ink text-paper px-3 py-1 rounded-sm hover:bg-brass transition">
+              <Link to="/login" className="text-sm px-3 py-1 hover:text-accent">Log in</Link>
+              <Link to="/register" className="text-sm bg-accent text-ink font-medium px-3 py-1 rounded-sm hover:opacity-90 transition">
                 Sign up
               </Link>
             </>

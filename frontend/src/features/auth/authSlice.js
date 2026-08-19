@@ -56,6 +56,14 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchMe.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+      })
+      .addCase(fetchMe.rejected, (state) => {
+        state.user = null;
+        state.token = null;
+        localStorage.removeItem("booked_token");
+      })
       .addMatcher(
         (action) => [registerUser.pending.type, loginUser.pending.type].includes(action.type),
         (state) => {
@@ -78,15 +86,7 @@ const authSlice = createSlice({
           state.status = "failed";
           state.error = action.payload;
         }
-      )
-      .addCase(fetchMe.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-      })
-      .addCase(fetchMe.rejected, (state) => {
-        state.user = null;
-        state.token = null;
-        localStorage.removeItem("booked_token");
-      });
+      );
   },
 });
 
