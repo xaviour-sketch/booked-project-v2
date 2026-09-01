@@ -1,17 +1,24 @@
 from flask import Flask
 from config import Config
 from app.extensions import db, migrate, jwt, bcrypt, cors
+from app.firebase import initialize_firebase
 
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
+    initialize_firebase()
+
     db.init_app(app)
     migrate.init_app(app, db)
     jwt.init_app(app)
     bcrypt.init_app(app)
-    cors.init_app(app, resources={r"/api/*": {"origins": app.config["FRONTEND_ORIGIN"]}}, supports_credentials=True)
+    cors.init_app(
+        app,
+        resources={r"/api/*": {"origins": app.config["FRONTEND_ORIGIN"]}},
+        supports_credentials=True,
+    )
 
     from app.routes.auth import auth_bp
     from app.routes.books import books_bp

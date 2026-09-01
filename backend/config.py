@@ -11,3 +11,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "dev-jwt-secret")
     FRONTEND_ORIGIN = os.environ.get("FRONTEND_ORIGIN", "http://localhost:5173")
+    FIREBASE_CREDENTIALS = os.environ.get(
+        "FIREBASE_CREDENTIALS",
+        "firebase-service-account.json"
+    )
